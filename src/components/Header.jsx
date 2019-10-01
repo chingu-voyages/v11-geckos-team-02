@@ -1,8 +1,8 @@
 import React from 'react';
 
 const Header = () => {
-    
-  return (<nav id="navbar">
+
+    return (<nav id="navbar">
         <div className='container'>
             <h1 className="logo">
                 <a aria-current="page" className="active" href="/">RECIPES</a>

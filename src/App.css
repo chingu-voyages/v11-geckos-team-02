@@ -25,7 +25,7 @@ body{
 }
 
 .slider_image{
-  background: url('../src/brunch-header.jpg')no-repeat center center/cover;
+  background: url('./assets/img/brunch-header.jpg')no-repeat center center/cover;
   padding: 10%;
 }
 .header-section {
@@ -53,8 +53,10 @@ body{
   overflow: auto;
 }
 .container {
-  margin: 0 auto;
-  max-width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
 }
 #navbar h1 {
   float: left;
@@ -136,24 +138,26 @@ article.slider__slide {
 }
 
 @media only screen and (max-width: 600px) {
-  body {
-    background-color: lightblue;
-  }
   .slider_image{
-    padding:0;
+    height: 500px;
+    display:flex;
+    align-items: center;
+    justify-content: center
   }
   .h4, h4,.h1, h1 {
     font-size: 1.5rem;
   }
   #c506{
-    visibility: hidden;
+    transform: scale(0.7);
+    font-size: 2em;
+  }
+
+  .slider__slide{
+    transform: scale(0.8);
   }
 
   .recipes-item {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    grid-column-gap: 2%;
-    grid-row-gap: 1%;
-    margin-top: 1%;
+    display: flex;
+    flex-direction: column;
   }
 }

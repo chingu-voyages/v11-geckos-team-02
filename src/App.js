@@ -1,17 +1,18 @@
-import React from 'react';
-import Header from '../src/element/header';
-import './App.css';
-import knifeimg from '../src/knife_banner.png'
+import React from "react";
+import Header from "./components/Header";
+import SliderImage from "./components/SliderImage";
+import RecipeCard from "./components/RecipeCard";
+import "./App.css";
 
 export default class PersonList extends React.Component {
   constructor(props) {
-    super();
+    super(props);
 
     this.state = {
       slider: [],
       isloaded: false,
       isrecipe: false,
-      recipes:[],
+      recipes: []
     };
   }
 
@@ -24,8 +25,7 @@ export default class PersonList extends React.Component {
         this.setState({
           isloaded: true,
           slider: json,
-          isrecipe: false,
-
+          isrecipe: false
         });
       });
 
@@ -42,63 +42,33 @@ export default class PersonList extends React.Component {
   }
 
   render() {
-    var { isloaded, slider, recipes, isrecipe } = this.state;
-    
+    const { isloaded, slider, recipes, isrecipe } = this.state;
+
     if (!isloaded) {
       return <div>Loading</div>;
     } else {
       const baseUri = slider.baseUri;
-      return (    
-        <div >
-          {/* Showing header information here*/}
-          <Header />
-          {/* End header information here*/}
-          <div className="slider_image">
-            <div id="c506" className="component_ContentDisplay_Content">
-              <div className="plain_content">
-                <h1 ><span >RECIPE INSPIRATION FOR  EVERY OCCASION</span></h1>
-                <h4 >
-                  <span >
-                    <strong>
-                        <img align="baseline" alt="knife banner" height="27" src={knifeimg} title="knife banner" width="711"/>
-                        </strong>
-                      </span>
-                </h4>
-  
-              <h4 ><span >Search hundreds of iron rich beef and lamb recipes</span></h4>
-            </div>
-          </div>
-         </div>
-          
-        <div className="clear"></div>
+      return (
+        <div>
+        {/* Showing header information here*/}
+        <Header />
+        {/* End header information here*/}
 
-          {/* Showing Content information here*/}
-          {(!isrecipe)?'':
-            <div className="recipes-item container">
-              {recipes.results.map(el=>{
-                      return (
-                        <article className='slider__slide' key={el.id}>
-                          <a
-                            data-carousel-link=''
-                            data-internal-referrer='hp_carousel 01_Oktoberfest Recipes'
-                            data-referring-position='carousel 01'
-                            href={`${baseUri}${el.image}`}
-                            target='_self /'
-                          >
-                            <div className='slider__text'>
-                              <h5 className='slider__title'>{el.title}</h5>
-                              <p className='slider__description'>
-                                Prepration Time: {el.readyInMinutes} Minutes
-                              </p>
-                            </div>
-                            <img key={el.id} src={`${baseUri}${el.image}`} />
-                          </a>
-                        </article>
-                      );
-                    }
-                )}
-         `  </div> }
-          {/* End Content Part From Here using the API*/}
+        <SliderImage />
+        {/* <div className="clear"></div> */}
+
+        {/* Showing Content information here*/}
+        {!isrecipe ? (
+          "Loading recipes..."
+        ) : (
+          <div className="recipes-item container">
+            {recipes.results.map(el => (
+              <RecipeCard key={el.id} el={el} baseUri={baseUri} />
+            ))}
+            `{" "}
+          </div>
+        )}
+        {/* End Content Part From Here using the API*/}
         </div>
       );
     }
